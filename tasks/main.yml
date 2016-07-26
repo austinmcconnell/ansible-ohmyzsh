@@ -1,0 +1,29 @@
+---
+ - name: Install zsh
+   apt: name={{ item.name }} state=latest update_cache=yes
+   with_items:
+    - { name: 'git' }
+    - { name: 'zsh' }
+   become: true
+   register: zshinstalled
+   tags: ohmyzsh
+
+ - name: Cloning oh-my-zsh
+   git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
+   when: zshinstalled
+   register: cloned
+   tags: ohmyzsh
+
+ - name: Replace .zshrc
+   copy: src=~/.oh-my-zsh/templates/zshrc.zsh-template dest=~/.zshrc remote_src=True
+   when: cloned|success
+   tags: ohmyzsh
+
+ - name: Change oh-my-zsh theme
+   lineinfile: dest=~/.zshrc regexp='^ZSH_THEME' line='ZSH_THEME="Soliah"' state=present
+   tags: ohmyzsh
+
+ - name: Change user shell
+   user: name=austin shell=/bin/zsh
+   become: true
+   tags: ohmyzsh
