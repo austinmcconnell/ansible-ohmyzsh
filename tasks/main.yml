@@ -24,6 +24,6 @@
    tags: ohmyzsh
 
  - name: Change user shell
-   user: name=austin shell=/bin/zsh
+   user: name={{ ansible_user }} shell=/bin/zsh
    become: true
    tags: ohmyzsh
