@@ -15,8 +15,8 @@
    tags: ohmyzsh
 
  - name: Replace .zshrc
-   copy: src=~/.oh-my-zsh/templates/zshrc.zsh-template dest=~/.zshrc remote_src=True
-   when: cloned|success
+   copy: src=.zshrc dest=~/.zshrc
+   when: cloned|succeeded
    tags: ohmyzsh
 
  - name: Change oh-my-zsh theme
