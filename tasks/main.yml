@@ -20,7 +20,7 @@
    tags: ohmyzsh
 
  - name: Change oh-my-zsh theme
-   lineinfile: dest=~/.zshrc regexp='^ZSH_THEME' line='ZSH_THEME="Soliah"' state=present
+   lineinfile: dest=~/.zshrc regexp='^ZSH_THEME' line='ZSH_THEME={{ zsh_theme }}' state=present
    tags: ohmyzsh
 
  - name: Change user shell
